@@ -1,0 +1,1 @@
+suff: <?php echo implode( ", ", $_POST); ?><br>

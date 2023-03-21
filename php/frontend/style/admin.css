@@ -1,0 +1,35 @@
+.admin-container {
+    display: grid;
+    grid-template-columns: auto;
+    margin: 2vh;
+}
+.admin-item {
+    margin: 10px;
+    background-color: #D90429;
+    color: #fff;
+    padding: 1vw;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 20px;
+}
+@media  all and (min-width: 60vh) {
+    .admin-container {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .admin-item {
+        width: 42vw;
+    }
+}
+@media  all and (min-width: 120vh) {
+    .admin-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    .admin-item {
+        width: 18vw;
+    }
+}

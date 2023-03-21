@@ -1,0 +1,156 @@
+body {
+    background-color: #EDF2F4;
+    margin: 0;
+    font-family: 'Atkinson Hyperlegible';
+}
+/*generic*/
+
+/*navbar*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #D90429;
+}
+.name {
+    font-size: 8vh;
+    font-weight: bold;
+    color: #EDF2F4;
+}
+.options {
+    display: flex;
+    justify-content: flex-end;
+}
+.options a {
+    margin-left: 10px;
+}
+.aicon {
+    fill: #EDF2F4;
+    transition: 100ms;
+}
+.aicon:hover {
+    fill: #8D99AE;
+    transition: 200ms;
+}
+
+/*main page*/
+#hero {
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh; /* adjust the height to your needs */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#hero-search {
+    width: 80%; /* adjust the width to your needs */
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+#hero-searchbar {
+    width: 70%; /* adjust the width to your needs */
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+#hero-searchexecute {
+    background-color: #EF233C;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+#hero-searchexecute:hover {
+    background-color: #D90429;
+    transition: 250ms;
+}
+
+.section {
+    font-size: 3rem;
+    text-align: center;
+    margin: 1rem;
+}
+
+.book-container {
+    display: grid;
+    grid-template-columns: auto;
+}
+.book-item {
+    margin: 10px;
+    background-color: #fff;
+    padding: 1vw;
+    font-size: 1.5em;
+    text-align: center;
+    width: 88vw;
+    border-radius: 20px;
+}
+.bookimg-1 {
+    height: 40vh;
+    max-width: 100%;
+}
+/*login*/
+.login {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+}
+.loginform {
+    display: flex;
+    flex-direction: column;
+}
+.txtinput {
+background-color: #f2f2f2;
+border: none;
+border-radius: 5px;
+color: #333;
+font-size: 16px;
+margin-bottom: 20px;
+padding: 10px;
+}
+
+.btn {
+background-color: #333;
+border: none;
+border-radius: 5px;
+color: #fff;
+cursor: pointer;
+font-size: 16px;
+padding: 10px;
+}
+
+.btn:hover {
+background-color: #555;
+}
+@media  all and (min-width: 60vh) {
+    .book-container {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .book-item {
+        width: 42vw;
+    }
+}
+@media  all and (min-width: 120vh) {
+    .book-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    .book-item {
+        width: 18vw;
+    }
+}
