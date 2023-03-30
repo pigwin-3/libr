@@ -7,12 +7,118 @@
     margin: 10px;
     background-color: #D90429;
     color: #fff;
-    padding: 1vw;
+    padding: 0.4em;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
     border-radius: 20px;
+    filter: drop-shadow(0 0 0.2rem #000000);
+    transition: 250ms;
 }
+.admin-item:hover {
+    filter: drop-shadow(0 0 0.0);
+    box-shadow: inset 0 0 0.75rem #000000;
+}
+.admin-center {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: auto;
+    width: 100%;
+}
+.admin-settings-container-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EDF2F4;
+    width: 100vh;
+    max-width: 100vw;
+    filter: drop-shadow(0 0 0.75rem #555555);
+    border-bottom-right-radius: 10vh;
+    border-bottom-left-radius: 10vh;
+    padding: 2vh;
+    font-size: 1.5em;
+}
+.admin-settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EDF2F4;
+    width: 100vh;
+    max-width: 100vw;
+    filter: drop-shadow(0 0 0.75rem #555555);
+    border-radius: 10vh;
+    padding: 2vh;
+    font-size: 1.5em;
+    margin-top: 4vh;
+    margin-bottom: 1vh;
+}
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.admin-input {
+    width: 80%;
+    height: 2em;
+    font-size: 1em;
+    padding: 0.1em;
+    border-radius: 0.5em;
+    text-align: center;
+    background-color: #ffffff;
+    transition: 200ms;
+}
+.admin-input:active {
+    background-color: #cccccc;
+}
+.admin-autofill-correct {
+    background-color: #adff2f;
+    animation: correct 2s forwards;
+}
+@keyframes correct {
+    0% {
+        background-color: #ffffff;
+    }
+    10% {
+        background-color: #adff2f;
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+.admin-autofill-wrong {
+    background-color: #ff2f2f;
+    animation: wrong 2s forwards;
+}
+@keyframes wrong {
+    0% {
+        background-color: #ffffff;
+    }
+    10% {
+        background-color: #ff2f2f;
+    }
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+.admin-cover {
+    min-width: 5vw;
+    border-radius: 1vh;
+    background-color: #faebd7;
+}
+
+@media (prefers-reduced-motion) {
+    .admin-autofill-correct {
+        background-color: #adff2f;
+        animation: correct 20s forwards;
+    }
+}
+
 @media  all and (min-width: 60vh) {
     .admin-container {
         display: grid;

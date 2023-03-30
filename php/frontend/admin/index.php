@@ -13,7 +13,7 @@ session_start();
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
 	</head>
-	<body class="loggedin">
+	<body>
         <?php include '../../tools/navbar.html'; ?>
         <div class="admin-container">
             <a href="addbook.php">
