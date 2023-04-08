@@ -35,7 +35,7 @@
     align-items: center;
     background-color: #EDF2F4;
     width: 100vh;
-    max-width: 100vw;
+    max-width: 88vw;
     filter: drop-shadow(0 0 0.75rem #555555);
     border-bottom-right-radius: 10vh;
     border-bottom-left-radius: 10vh;
@@ -48,7 +48,7 @@
     align-items: center;
     background-color: #EDF2F4;
     width: 100vh;
-    max-width: 100vw;
+    max-width: 88vw;
     filter: drop-shadow(0 0 0.75rem #555555);
     border-radius: 10vh;
     padding: 2vh;
@@ -61,16 +61,18 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    font-size: 2em;
 }
 .admin-input {
     width: 80%;
-    height: 2em;
-    font-size: 1em;
+    height: 1.5em;
+    font-size: 1.5em;
     padding: 0.1em;
     border-radius: 0.5em;
     text-align: center;
     background-color: #ffffff;
     transition: 200ms;
+    margin-top: 0.5vh;
 }
 .admin-input:active {
     background-color: #cccccc;
@@ -126,6 +128,13 @@
     }
     .admin-item {
         width: 42vw;
+    }
+    .admin-form {
+        font-size: 1em;
+    }
+    .admin-input {
+        height: 1.5em;
+        font-size: 1em;
     }
 }
 @media  all and (min-width: 120vh) {

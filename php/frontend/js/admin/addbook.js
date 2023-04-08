@@ -1,11 +1,9 @@
-const submitBtn = document.getElementById('submit-btn');
-
 const isbnInput = document.getElementById("isbn");
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const olidInput = document.getElementById("olid");
 
-submitBtn.addEventListener('click', () => {
+function getDataFromISBN() {
   const isbn = document.getElementById('isbn').value;
   //console.log('https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn + '&jscmd=data&format=json')
 
@@ -42,9 +40,10 @@ submitBtn.addEventListener('click', () => {
         isbnInput.classList.remove("admin-autofill-wrong");
     }, 2000);
     });
-});
-console.log("gmsa")
-validateaddbook()
+}
+
+validateaddbook();
+
 function validateaddbook() {
   fetch("https://openlibrary.org/books/OL24620058M.json")
   .then(response => response.json())
@@ -56,5 +55,4 @@ function validateaddbook() {
     }
   })
   .catch(error => console.error(error));
-
 }

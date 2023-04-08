@@ -12,6 +12,7 @@ body {
     align-items: center;
     padding: 10px;
     background-color: #D90429;
+    margin: 0;
 }
 .name {
     font-size: 8vh;
