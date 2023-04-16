@@ -1,6 +1,24 @@
 <?php
 session_start();
+// If the user is not logged in redirect to the login page...
+if (!isset($_SESSION['loggedin'])) {
+	header('Location: ../');
+	exit;
+}
 
+require '../../tools/database.php';
+// gets user info from db useing id
+$stmt = $con->prepare('SELECT `perm` FROM `accounts` WHERE `id` = ?');
+$stmt->bind_param('i', $_SESSION['id']);
+$stmt->execute();
+$stmt->bind_result($perm);
+$stmt->fetch();
+$stmt->close();
+// if perm is 1 or lower exit to main page
+if($perm <= 1) {
+    header('Location: ../');
+	exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,10 +49,14 @@ session_start();
         <?php include '../../tools/navbar.html'; ?>
 		<div class="admin-center">
 			<div class="admin-settings-container-top">
+				<div class="admin-left-card">
+					<a href="./"><img src="../assets/back.svg" alt="back buttton" class="admin-icon"></a>
+					<h1 class="page-name">legg til bok</h1>
+				</div>
 				<form action="" class="admin-form" method="post">
 
 					<label for="isbn">ISBN:</label>
-					<input type="text" id="isbn" name="isbn" class="admin-input" pattern="[0-9]*" inputmode="numeric" placeholder="9780812976564">
+					<input type="text" id="isbn" name="isbn" class="admin-input" pattern="^[0-9 \-]*$" placeholder="978-0-8129-7656-4">
 
 					<button class="admin-input" type="button" onclick="getDataFromISBN()">Get data from ISBN</button>
 
@@ -55,12 +77,62 @@ session_start();
 			<?php
 			if( isset($_POST['olid']) )
 			{
+				if (validate_isbn($_POST['isbn'])) {
+					echo 'Valid ISBN';
+				} else {
+					echo 'Invalid ISBN';
+				}
+
+				$stmt = $con->prepare("INSERT INTO `books` (`isbn`, `name`, `author`, `oclc`) VALUES (?, ?, ?, ?)");
+				// Bind the values to the placeholders
+				$isbn = format_isbn($_POST['isbn']);
+				$name = $_POST['title'];
+				$author = $_POST['author'];
+				$oclc = $_POST['olid'];
+				//$stmt->execute([$isbn, $name, $author, $oclc]);
+				
+
+
+
 				echo "<div>book added yay</div>";
-				echo '<img src="https://covers.openlibrary.org/b/olid/', $_POST['olid'], '-M.jpg" alt="cover" class="admin-cover">';
-				echo "<div>title	:	", $_POST['title'], "</div>";
-				echo "<div>author	:	", $_POST['author'], "</div>";
+				echo '<img src="https://covers.openlibrary.org/b/olid/', $oclc, '-M.jpg" alt="cover" class="admin-cover">';
+				echo "<div>title	:	", $name, "</div>";
+				echo "<div>author	:	", $author, "</div>";
+				echo "<div>isbn	:	", $isbn, "</div>";
 
 			}
+
+			// Function to format an ISBN by adding -
+			function format_isbn($isbn) {
+				$isbn = str_replace(array('-', ' '), '', $isbn); // remove all bad formating stuff
+				$formatted_isbn = '';
+				if (strlen($isbn) == 10) {
+				// ISBN-10 = n-nnnn-nnn-c
+				$formatted_isbn = substr($isbn, 0, 1) . '-' . substr($isbn, 1, 4) . '-' . substr($isbn, 5, 3) . '-' . substr($isbn, 8, 1);
+				} else if (strlen($isbn) == 13) {
+				// ISBN-13: = n-nnnn-nnnn-n-c
+				$formatted_isbn = substr($isbn, 0, 3) . '-' . substr($isbn, 3, 4) . '-' . substr($isbn, 7, 5) . '-' . substr($isbn, 12, 1);
+				} else {
+				// wrong length
+				$formatted_isbn = 'Invalid ISBN';
+				}
+				return $formatted_isbn;
+			}
+			
+			// Function to validate an ISBN using a regular expression
+			function validate_isbn($isbn) {
+				$isbn = str_replace(array('-', ' '), '', $isbn); // Remove existing hyphens and spaces
+				if (strlen($isbn) == 10 || strlen($isbn) == 13) {
+				if (preg_match('/^(97(8|9))?\d{9}(\d|X)$/', $isbn)) {
+					return true; // Valid ISBN (:
+				} else {
+					return false; // Invalid ISBN ):
+				}
+				} else {
+				return false; // Invalid length (id say its average ;) )
+				}
+			}  
+			  
 			?>
 			</div>
 		</div>

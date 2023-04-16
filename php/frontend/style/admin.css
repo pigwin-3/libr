@@ -41,6 +41,7 @@
     border-bottom-left-radius: 10vh;
     padding: 2vh;
     font-size: 1.5em;
+    margin-bottom: 1vh;
 }
 .admin-settings-container {
     display: flex;
@@ -108,11 +109,73 @@
     }
 }
 
+.admin-icon {
+    width: 5vh;
+}
+
 .admin-cover {
     min-width: 5vw;
     border-radius: 1vh;
     background-color: #faebd7;
 }
+
+/*just for the cards*/
+
+.admin-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.admin-card {
+    border: 1px solid #ccc;
+    border-radius: 2vh;
+    padding: 20px;
+    flex: 1;
+    margin: 1vh;
+}
+
+.admin-card img {
+    max-height: 20vh;
+    max-width: 20vh;
+}
+
+.admin-card-details {
+    margin-top: 10px;
+    text-align: center;
+    margin: 1vh;
+}
+
+.admin-card-id {
+    display: none;
+}
+
+.admin-card-title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.admin-card-author,
+.admin-card-isbn,
+.admin-card-oclc {
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+.admin-left-card {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 2vh;
+    padding: 20px;
+    flex: 1;
+    margin: 1vh;
+    width: 100vh;
+    max-width: 80%;
+}
+.page-name {
+    font-size: 3em;
+    margin: 0.1em;
+    margin: auto;
+}
+  
 
 @media (prefers-reduced-motion) {
     .admin-autofill-correct {
@@ -135,6 +198,19 @@
     .admin-input {
         height: 1.5em;
         font-size: 1em;
+    }
+    .admin-card-id {
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0;
+        display: inline;
+    }
+    .admin-card {
+        display: flex;
+        flex-direction: row;
+    }
+    .admin-card-details {
+        text-align: left;
     }
 }
 @media  all and (min-width: 120vh) {

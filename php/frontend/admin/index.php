@@ -1,7 +1,24 @@
 <?php
 session_start();
 // If the user is not logged in redirect to the login page...
+if (!isset($_SESSION['loggedin'])) {
+	header('Location: ../');
+	exit;
+}
 
+require '../../tools/database.php';
+// gets user info from db useing id
+$stmt = $con->prepare('SELECT `perm` FROM `accounts` WHERE `id` = ?');
+$stmt->bind_param('i', $_SESSION['id']);
+$stmt->execute();
+$stmt->bind_result($perm);
+$stmt->fetch();
+$stmt->close();
+// if perm is 1 or lower exit 
+if($perm <= 1) {
+    header('Location: ../');
+	exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +36,11 @@ session_start();
             <a href="addbook.php">
                 <div class="admin-item">
                     legg til bok
+                </div>
+            </a>
+            <a href="listbooks.php">
+                <div class="admin-item">
+                    se alle bøker
                 </div>
             </a>
         </div>
