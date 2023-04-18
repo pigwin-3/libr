@@ -75,22 +75,44 @@ if($perm <= 1) {
 			</div>
 			<div class="admin-settings-container">
 			<?php
-			if( isset($_POST['olid']) )
+			if( isset($_POST['title']) )
 			{
-				if (validate_isbn($_POST['isbn'])) {
-					echo 'Valid ISBN';
-				} else {
-					echo 'Invalid ISBN';
-				}
+				require '../../tools/database.php';
 
 				$stmt = $con->prepare("INSERT INTO `books` (`isbn`, `name`, `author`, `oclc`) VALUES (?, ?, ?, ?)");
 				// Bind the values to the placeholders
-				$isbn = format_isbn($_POST['isbn']);
+				if (validate_isbn($_POST['isbn']) == 2) {
+					//echo 'Valid ISBN';
+					$isbn = unformat_isbn($_POST['isbn']);
+				} elseif (validate_isbn($_POST['isbn']) == 0) {
+					//echo 'No ISBN or ISBN wrong length';
+					$isbn = '0';
+				} else {
+					//echo 'Invalid ISBN';
+					$isbn = '0';
+				}
+
 				$name = $_POST['title'];
 				$author = $_POST['author'];
-				$oclc = $_POST['olid'];
-				//$stmt->execute([$isbn, $name, $author, $oclc]);
-				
+				if( $_POST['olid'] != '' ) {
+					$oclc = $_POST['olid'];
+				} else {
+					$oclc = '0';
+				}
+                $stmt->bind_param('ssss', $isbn, $name, $author, $oclc);
+				$stmt->execute();
+
+
+				$stmt = $con->prepare('SELECT * FROM `books` WHERE `isbn` = ? AND `name`= ? AND `author` = ? AND `oclc` = ?');
+				$stmt->bind_param('ssss', $isbn, $name, $author, $oclc);
+				$stmt->execute();
+				$stmt->bind_result($bookid, $isbn, $name, $author, $oclc);
+
+				echo "<div>bookids: ";
+				while ($stmt->fetch()) {
+					echo $bookid, ", ";
+				}
+				echo "</div>";
 
 
 
@@ -98,8 +120,14 @@ if($perm <= 1) {
 				echo '<img src="https://covers.openlibrary.org/b/olid/', $oclc, '-M.jpg" alt="cover" class="admin-cover">';
 				echo "<div>title	:	", $name, "</div>";
 				echo "<div>author	:	", $author, "</div>";
-				echo "<div>isbn	:	", $isbn, "</div>";
+				echo "<div>isbn	:	", unformat_isbn($isbn), "</div>";
 
+			}
+
+			// make storage ready
+			function unformat_isbn($isbn) {
+				$isbn = str_replace(array('-', ' '), '', $isbn); // remove all bad formating stuff
+				return $isbn;
 			}
 
 			// Function to format an ISBN by adding -
@@ -124,12 +152,12 @@ if($perm <= 1) {
 				$isbn = str_replace(array('-', ' '), '', $isbn); // Remove existing hyphens and spaces
 				if (strlen($isbn) == 10 || strlen($isbn) == 13) {
 				if (preg_match('/^(97(8|9))?\d{9}(\d|X)$/', $isbn)) {
-					return true; // Valid ISBN (:
+					return 2; // Valid ISBN (:
 				} else {
-					return false; // Invalid ISBN ):
+					return 1; // Invalid ISBN ):
 				}
 				} else {
-				return false; // Invalid length (id say its average ;) )
+				return 0; // Invalid length (id say its average ;) )
 				}
 			}  
 			  

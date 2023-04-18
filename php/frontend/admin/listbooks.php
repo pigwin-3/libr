@@ -45,8 +45,8 @@ if($perm <= 1) {
                         <option value="name" selected>Filter by book name</option>
                         <option value="author">Filter by author's last name</option>
                     </select>
-                    <select name="filter_letter">
-                        <option value="" selected>All</option>
+                    <select name="filter_letter" id="filter_letter">
+                        <option value="">All</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -83,6 +83,9 @@ if($perm <= 1) {
                     </select>
                     <input type="submit" value="Filter">
                 </form>
+                <script>
+                    //document.getElementById('filter_letter').value = 'B';
+                </script>
             </div>
             
             <?php
