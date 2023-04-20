@@ -90,6 +90,9 @@ if($perm <= 1) {
             
             <?php
 
+            // results per page
+            $results_per_page = 10;
+
             require '../../tools/database.php';
 
             // Get the selected letter
@@ -113,21 +116,46 @@ if($perm <= 1) {
                 $filter = 'name';
             }
 
-            // Get books from the database
+            // get total number of results
+            if ($filter == 'author') {
+                $count_stmt = $con->prepare('SELECT COUNT(*) FROM `books` WHERE SUBSTRING_INDEX(`author`, " ", -1) LIKE ?');
+            } else {
+                $count_stmt = $con->prepare('SELECT COUNT(*) FROM `books` WHERE `name` LIKE ?');
+            }
+            $count_stmt->bind_param('s', $first_letter);
+            $count_stmt->execute();
+            $count_stmt->bind_result($total_results);
+            $count_stmt->fetch();
+            $count_stmt->close();
+
+            // get total amount of pages
+            $total_pages = ceil($total_results / $results_per_page);
+
+            // get page number
+            if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $total_pages) {
+                $current_page = $_GET['page'];
+            } else {
+                $current_page = 1;
+            }
+
+            // get offset
+            $offset = ($current_page - 1) * $results_per_page;
+
+            // get books that are on the current page
             if ($filter == 'author') {
                 if ($sort == 'author') {
-                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE SUBSTRING_INDEX(`author`, " ", -1) LIKE ? ORDER BY SUBSTRING_INDEX(`author`, " ", -1) ASC');
+                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE SUBSTRING_INDEX(`author`, " ", -1) LIKE ? ORDER BY SUBSTRING_INDEX(`author`, " ", -1) ASC LIMIT ? OFFSET ?');
                 } else {
-                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE SUBSTRING_INDEX(`author`, " ", -1) LIKE ? ORDER BY `name`');
+                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE SUBSTRING_INDEX(`author`, " ", -1) LIKE ? ORDER BY `name` LIMIT ? OFFSET ?');
                 }
             } else {
                 if ($sort == 'author') {
-                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE `name` LIKE ? ORDER BY SUBSTRING_INDEX(`author`, " ", -1) ASC');
+                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE `name` LIKE ? ORDER BY SUBSTRING_INDEX(`author`, " ", -1) ASC LIMIT ? OFFSET ?');
                 } else {
-                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE `name` LIKE ? ORDER BY `name`');
+                    $stmt = $con->prepare('SELECT `bookid`, `isbn`, `name`, `author`, `oclc` FROM `books` WHERE `name` LIKE ? ORDER BY `name` LIMIT ? OFFSET ?');
                 }
             }
-            $stmt->bind_param('s', $first_letter);
+            $stmt->bind_param('sii', $first_letter, $results_per_page, $offset);
             $stmt->execute();
             $stmt->bind_result($bookid, $isbn, $name, $author, $oclc);
 

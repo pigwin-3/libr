@@ -40,7 +40,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
             $stmt->bind_param('sss', $_POST['username'], $password, $_POST['email']);
             $stmt->execute();
 			echo 'You have successfully registered, you can now login!';
-			header('Location: ../home.php');
+			header('Location: ../index.php');
         } else {
             // fuck
             echo 'Could not prepare statement!';
