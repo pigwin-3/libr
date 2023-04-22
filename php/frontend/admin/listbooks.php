@@ -91,7 +91,7 @@ if($perm <= 1) {
             <?php
 
             // results per page
-            $results_per_page = 10;
+            $results_per_page = 1;
 
             require '../../tools/database.php';
 
@@ -130,6 +130,8 @@ if($perm <= 1) {
 
             // get total amount of pages
             $total_pages = ceil($total_results / $results_per_page);
+
+            echo $total_pages, " ", $total_results;
 
             // get page number
             if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $total_pages) {
@@ -197,6 +199,67 @@ if($perm <= 1) {
 				}
 				return $formatted_isbn;
 			}
+            echo 'current page: ', $current_page;
+            echo '<div class="admin-page-switcher">';
+            if ($current_page > 1) {
+                echo '<a href="#" class="admin-arrow">&lt;</a>';
+            } else {
+                echo '<a href="#" class="admin-arrow disabled">&lt;</a>';
+            }
+
+            if ($total_pages <= 9) {
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    //if its the current page then add the class active
+                    if ($i == $current_page) {
+                        echo '<a href="#" class="active">', $i, '</a>';
+                    } else {
+                        echo '<a href="#">', $i, '</a>';
+                    }
+                }
+            } else {
+                //adds the "..." depending on what the current page is set to
+                if ($current_page <= 5) {
+                    for ($i = 1; $i <= 7; $i++) {
+                        if ($i == $current_page) {
+                            echo '<a href="#" class="active">', $i, '</a>';
+                        } else {
+                            echo '<a href="#">', $i, '</a>';
+                        }
+                    }
+                    echo '<span class="admin-dots">...</span>';
+                    echo '<a href="#">', $total_pages, '</a>';
+                } elseif ($current_page > $total_pages - 5) {
+                    echo '<a href="#">1</a>';
+                    echo '<span class="admin-dots">...</span>';
+                    for ($i = $total_pages - 6; $i <= $total_pages; $i++) {
+                        if ($i == $current_page) {
+                            echo '<a href="#" class="active">', $i, '</a>';
+                        } else {
+                            echo '<a href="#">', $i, '</a>';
+                        }
+                    }
+                } else {
+                    echo '<a href="#">1</a>';
+                    echo '<span class="admin-dots">...</span>';
+                    for ($i = $current_page - 2; $i <= $current_page + 2; $i++) {
+                        if ($i == $current_page) {
+                            echo '<a href="#" class="active">', $i, '</a>';
+                        } else {
+                            echo '<a href="#">', $i, '</a>';
+                        }
+                    }
+                    echo '<span class="admin-dots">...</span>';
+                    echo '<a href="#">', $total_pages, '</a>';
+                }
+            }
+
+            if ($current_page < $total_pages) {
+                echo '<a href="#" class="admin-arrow">&gt;</a>';
+            } else {
+                echo '<a href="#" class="admin-arrow disabled">&gt;</a>';
+            }
+            echo '</div>';
+
             ?>
 			</div>
 		</div>
