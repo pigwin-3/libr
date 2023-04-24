@@ -131,7 +131,7 @@ if($perm <= 1) {
             // get total amount of pages
             $total_pages = ceil($total_results / $results_per_page);
 
-            echo $total_pages, " ", $total_results;
+            echo "Got ", $total_results, " results";
 
             // get page number
             if (isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $total_pages) {
@@ -162,6 +162,10 @@ if($perm <= 1) {
             $stmt->bind_result($bookid, $isbn, $name, $author, $oclc);
 
 
+            //get the params for in the url (used in page switcher and the edit link)
+            $queryParams = $_GET;
+
+
             // Start the card container
             echo '<div class="admin-card-container">';
 
@@ -175,6 +179,7 @@ if($perm <= 1) {
                 echo '<p class="admin-card-author">'.$author.'</p>';
                 echo '<p class="admin-card-isbn">'.format_isbn($isbn).'</p>';
                 echo '</div>';
+                echo '<a href="'. edit_link($bookid) .'">rediger</a>';
                 echo '</div>';
             }
 
@@ -199,10 +204,23 @@ if($perm <= 1) {
 				}
 				return $formatted_isbn;
 			}
-            echo 'current page: ', $current_page;
+            function edit_link($id) {
+                $dir = dirname($_SERVER['PHP_SELF']);
 
-            //get the params for in the url
-            $queryParams = $_GET;
+                // return to ListBooks.php
+                $params = array(
+                    'id' => $id,
+                    'r' => 'lb',
+                    'filter_by' => isset($_GET['filter_by']) ? $_GET['filter_by'] : null,
+                    'filter_letter' => isset($_GET['filter_letter']) ? $_GET['filter_letter'] : null,
+                    'sort' => isset($_GET['sort']) ? $_GET['sort'] : null,
+                    'page' => isset($_GET['page']) ? $_GET['page'] : null
+                );
+                $params = array_filter($params); // remove any null values
+                $params = http_build_query($params);
+                $url = "{$dir}/editbook.php?{$params}";
+                return $url;
+            }
             
             echo '<div class="admin-page-switcher">';
             if ($current_page > 1) {

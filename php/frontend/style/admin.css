@@ -137,6 +137,7 @@
 .admin-card img {
     max-height: 20vh;
     max-width: 20vh;
+    min-width: 20%;
 }
 
 .admin-card-details {

@@ -61,7 +61,7 @@ if($perm <= 1) {
 					<button class="admin-input" type="button" onclick="getDataFromISBN()">Get data from ISBN</button>
 
 					<label for="title">Title:</label>
-					<input type="text" id="title" name="title" class="admin-input" placeholder="Book Title">
+					<input type="text" id="title" name="title" class="admin-input" placeholder="Book Title" required>
 
 					<label for="author">Author:</label>
 					<input type="text" id="author" name="author" class="admin-input" placeholder="Ola Norman">
