@@ -37,7 +37,30 @@ if($perm <= 1) {
 		<div class="admin-center">
 			<div class="admin-settings-container-top">
 				<div class="admin-left-card">
-					<a href="./"><img src="../assets/back.svg" alt="back buttton" class="admin-icon"></a>
+					<a href="
+                    <?php
+                    $dir = dirname($_SERVER['PHP_SELF']);
+                    if (isset($_GET['r'])){
+                        if ($_GET['r'] == "lb"){
+                            // return to ListBooks.php
+                            $params = array(
+                                'filter_by' => isset($_GET['filter_by']) ? $_GET['filter_by'] : null,
+                                'filter_letter' => isset($_GET['filter_letter']) ? $_GET['filter_letter'] : null,
+                                'sort' => isset($_GET['sort']) ? $_GET['sort'] : null,
+                                'page' => isset($_GET['page']) ? $_GET['page'] : null
+                            );
+                            $params = array_filter($params); // remove any null values
+                            $params = http_build_query($params);
+                            $url = "{$dir}/listbooks.php?{$params}";
+                            echo $url;
+                        } else {
+                            echo "./";
+                        }    
+                    } else {
+                        echo "./";
+                    }
+                    ?>
+                    "><img src="../assets/back.svg" alt="back buttton" class="admin-icon"></a>
 					<h1 class="page-name">rediger en bok</h1>
 				</div>
                 <?php 

@@ -172,14 +172,16 @@ if($perm <= 1) {
             // Loop through each book and display its information in a row (now card)
             while ($stmt->fetch()) {
                 echo '<div class="admin-card">';
-                echo '<img src="https://covers.openlibrary.org/b/olid/'.$oclc.'-M.jpg" alt="cover">';
+                echo '<div class="admin-card-cover"><img src="https://covers.openlibrary.org/b/olid/'.$oclc.'-M.jpg" alt="cover"></div>';
                 echo '<div class="admin-card-details">';
                 echo '<p class="admin-card-id">'.$bookid.'</p>';
                 echo '<h2 class="admin-card-title">'.$name.'</h2>';
                 echo '<p class="admin-card-author">'.$author.'</p>';
                 echo '<p class="admin-card-isbn">'.format_isbn($isbn).'</p>';
                 echo '</div>';
-                echo '<a href="'. edit_link($bookid) .'">rediger</a>';
+                echo '<div class="admin-card-icons">';
+                echo '<a href="'. edit_link($bookid) .'"><img src="../assets/edit.svg" alt="edit" style="height:7.5vh;"></a>';
+                echo '</div>';
                 echo '</div>';
             }
 

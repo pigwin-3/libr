@@ -43,6 +43,11 @@ if($perm <= 1) {
                     se alle bøker
                 </div>
             </a>
+            <a href="editbook.php">
+                <div class="admin-item">
+                    rediger en bok inføring
+                </div>
+            </a>
         </div>
 	</body>
 </html>

@@ -79,7 +79,7 @@ if($perm <= 1) {
 			{
 				require '../../tools/database.php';
 
-				$stmt = $con->prepare("INSERT INTO `books` (`isbn`, `name`, `author`, `oclc`) VALUES (?, ?, ?, ?)");
+				$stmt1 = $con->prepare("INSERT INTO books (isbn, name, author, oclc) SELECT isbn, name, author, oclc FROM (SELECT ? AS isbn, ? AS name, ? AS author, ? AS oclc) AS tmp WHERE NOT EXISTS ( SELECT * FROM books WHERE isbn = ? AND name = ? AND author = ? AND oclc = ? ) LIMIT 1");
 				// Bind the values to the placeholders
 				if (validate_isbn($_POST['isbn']) == 2) {
 					//echo 'Valid ISBN';
@@ -99,8 +99,13 @@ if($perm <= 1) {
 				} else {
 					$oclc = '0';
 				}
-                $stmt->bind_param('ssss', $isbn, $name, $author, $oclc);
-				$stmt->execute();
+                $stmt1->bind_param('ssssssss', $isbn, $name, $author, $oclc, $isbn, $name, $author, $oclc);
+				echo "test";
+				$stmt1->execute();
+
+				$stmt2 = $con->prepare("INSERT INTO bookcopy (bookid, `in stock`) VALUES ((SELECT bookid FROM books WHERE isbn = ? AND name = ? AND author = ? AND oclc = ?), 1)");
+				$stmt2->bind_param('ssss', $isbn, $name, $author, $oclc);
+				$stmt2->execute();
 
 
 				$stmt = $con->prepare('SELECT * FROM `books` WHERE `isbn` = ? AND `name`= ? AND `author` = ? AND `oclc` = ?');
