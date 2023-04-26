@@ -30,6 +30,7 @@ if($perm <= 1) {
 		<link href="../style/scanner.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
+		<h1>husk å lage custum scann greie her!</h1>
 		<script defer src="../js/admin/loanbookscanner.js"></script>
 		<script defer src="../js/html5-qrcode.js"></script>
 	</head>
@@ -53,7 +54,7 @@ if($perm <= 1) {
 			<div class="admin-settings-container-top">
 				<div class="admin-left-card">
 					<a href="./"><img src="../assets/back.svg" alt="back buttton" class="admin-icon"></a>
-					<h1 class="page-name">Lån ut bok</h1>
+					<h1 class="page-name">Retuner bok</h1>
 				</div>
 				<form action="" class="admin-form" method="post">
 
@@ -70,20 +71,8 @@ if($perm <= 1) {
 			<div class="admin-settings-container">
 			<?php
 			if (isset($_POST['bid'])) {
-				$stmt = $con->prepare('SELECT `usrid` FROM `loan` WHERE `id` = ?');
-				$stmt->bind_param('s', $_POST['bid']);
-				$stmt->execute();
-				$stmt->store_result();
-				// Check if there is anything there
-				if ($stmt->num_rows > 0) {
-					//DELETE FROM loan WHERE id = 25;
-					echo "Ser ut som  at boken allerede er lånt ut.";
-				} else {
-					$stmt = $con->prepare('INSERT INTO `loan`(`usrid`, `id`) VALUES (?,?)');
-					$stmt->bind_param('ss', $_POST['uid'], $_POST['bid']);
-					$stmt->execute();
-					echo "Bok er nå lånt ut!";
-				}
+				//INSERT INTO loanlog (usrid, id, loandate, loanend, loanid) SELECT usrid, id, loandate, loanend, loanid FROM loan WHERE id = ?;
+				//DELETE FROM loan WHERE id = ?
 			}
 			?>
 			</div>

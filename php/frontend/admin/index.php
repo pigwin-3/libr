@@ -48,6 +48,11 @@ if($perm <= 1) {
                     rediger en bok inføring
                 </div>
             </a>
+            <a href="loanbook.php">
+                <div class="admin-item">
+                    lån ut bok
+                </div>
+            </a>
         </div>
 	</body>
 </html>

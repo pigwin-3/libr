@@ -39,10 +39,10 @@ function start() {
 
     function onScanSuccess(decodedText, decodedResult) {
       // what to scan for 0 = scan book 1 = user card
-      if (typeof scanable !== 'undefined') {
+      if (sessionStorage.getItem("scanable") == 1) {
         // doesnt ruin evryting
       }else{
-        var scanable = 0;
+        sessionStorage.setItem("scanable", "0");
         console.log('test004')
       }
       if (decodedText !== lastResult) {
@@ -50,12 +50,15 @@ function start() {
         lastResult = decodedText;
         // Handle on success condition with the decoded message.
         console.log(`Scan result ${decodedText}`, decodedResult);
-        if (scanable == 0) {
+        if (sessionStorage.getItem("scanable") == 0) {
           document.getElementById("informer-info").innerHTML = "scan user card";
-          var scanable = 1;
+          sessionStorage.setItem("scanable", "1");
+          document.getElementById("bid").value = decodedText;
         }else{
           console.log('test001')
+          sessionStorage.removeItem("scanable");
           closeModal(); // close the modal after scanning
+          document.getElementById("uid").value = decodedText;
           scanner.clear();
         }
         console.log('test002')
