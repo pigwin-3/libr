@@ -8,14 +8,11 @@ Frontend(uten loggin)
 
 - Hovedside
 - Søke side
-- Bok side (bilde av bok, tittel, forfatter, bok beskrivele)
 
 (med login)
 
 - Lån bok (bruker skal kunne låne en bok med iden)
-- (eventuelt) kunne komentere under bøker som alle kan se
-- Endre visningsnavn
-- Eventuelt profilbilde
+- se bøker tiligere lånt
 
 ## Admin
 
