@@ -40,21 +40,21 @@ body {
     background-image: url('../img/background.jpg');
     background-size: cover;
     background-position: center;
-    height: 60vh; /* adjust the height to your needs */
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: flex-end;
 }
 
 #hero-search {
-    width: 80%; /* adjust the width to your needs */
+    width: 80%;
     display: flex;
     justify-content: center;
     padding-bottom: 5vh;
 }
 
 #hero-searchbar {
-    width: 70%; /* adjust the width to your needs */
+    width: 70%; 
     padding: 1rem;
     border: none;
     border-radius: 5px;
@@ -76,27 +76,80 @@ body {
     transition: 250ms;
 }
 
+#search {
+    display: flex;
+    width: 99%;
+    max-width: 123vh;
+    justify-content: center;
+    align-items: flex-end;
+}
+#searchbar {
+    width: 70%; 
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+#searchexecute {
+    background-color: #EF233C;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#searchexecute:hover {
+    background-color: #D90429;
+    transition: 250ms;
+}
+
+.top {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.cont {
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    font-size: 2.5em;
+    padding-top: 1em;
+}
+
+
 .section {
     font-size: 3rem;
     text-align: center;
     margin: 1rem;
 }
 
-.book-container {
+.bookshelf {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: repeat(2, 1fr);
+    width: 95%;
+    max-width: 110vh;
+    gap: 2%;
 }
 .book-item {
-    margin: 10px;
+    margin: 0;
     background-color: #fff;
-    padding: 1vw;
-    font-size: 1.5em;
+    padding: 1%;
     text-align: center;
-    width: 88vw;
     border-radius: 20px;
+    box-sizing: border-box;
 }
-.bookimg-1 {
-    height: 40vh;
+.book-item-title {
+    font-size: 0.8em;
+    min-height: 2em;
+}
+.bookimg {
+    height: 15vh;
     max-width: 100%;
 }
 /*login*/
@@ -136,22 +189,15 @@ padding: 10px;
 background-color: #555;
 }
 @media  all and (min-width: 60vh) {
-    .book-container {
-        display: grid;
-        grid-template-columns: auto auto;
+    .bookshelf {
+        grid-template-columns: repeat(3, 1fr);
     }
-    .book-item {
-        width: 42vw;
+    .book-item-title {
+        font-size: 0.5em;
     }
 }
 @media  all and (min-width: 120vh) {
-    .book-container {
-        display: grid;
-        grid-template-columns: auto auto auto auto;
-        margin-left: 5vw;
-        margin-right: 5vw;
-    }
-    .book-item {
-        width: 18vw;
+    .bookshelf {
+        grid-template-columns: repeat(4, 1fr);
     }
 }

@@ -22,4 +22,49 @@
 .html5-qrcode-element {
     font-size: 2em;
 }
-  
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background-color: white;
+    margin: 1vh auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    animation: modal 750ms;
+}
+ 
+.admin-inform {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    pointer-events: none;
+}
+.admin-inform-content {
+    background-color: #ffffffee;
+    margin: 1vh auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    pointer-events: none;
+    font-size: 2em;
+    text-align: center;
+}

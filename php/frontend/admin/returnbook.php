@@ -30,8 +30,7 @@ if($perm <= 1) {
 		<link href="../style/scanner.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
-		<h1>husk å lage custum scann greie her!</h1>
-		<script defer src="../js/admin/loanbookscanner.js"></script>
+		<script defer src="../js/admin/returnbookscanner.js"></script>
 		<script defer src="../js/html5-qrcode.js"></script>
 	</head>
 	<body>
@@ -61,9 +60,6 @@ if($perm <= 1) {
 					<label for="bid">Book ID:</label>
 					<input type="text" id="bid" name="bid" class="admin-input" placeholder="1">
 
-					<label for="uid">User id:</label>
-					<input type="text" id="uid" name="uid" class="admin-input" placeholder="1" required>
-
 					<input type="submit" value="submit" id="submit-btn" class="admin-input">
 				</form>
 
@@ -71,8 +67,18 @@ if($perm <= 1) {
 			<div class="admin-settings-container">
 			<?php
 			if (isset($_POST['bid'])) {
-				//INSERT INTO loanlog (usrid, id, loandate, loanend, loanid) SELECT usrid, id, loandate, loanend, loanid FROM loan WHERE id = ?;
-				//DELETE FROM loan WHERE id = ?
+				$stockstate = '1';
+				$stmt = $con->prepare('UPDATE `bookcopy` SET `instock` = ? WHERE `bookcopy`.`id` = ?');
+				$stmt->bind_param('ss', $stockstate, $_POST['bid']);
+				$stmt->execute();
+
+				$stmt2 = $con->prepare('INSERT INTO loanlog (usrid, id, loandate, loanend, loanid) SELECT usrid, id, loandate, loanend, loanid FROM loan WHERE id = ?');
+				$stmt2->bind_param('s', $_POST['bid']);
+				$stmt2->execute();
+				$stmt2 = $con->prepare('DELETE FROM loan WHERE id = ?');
+				$stmt2->bind_param('s', $_POST['bid']);
+				$stmt2->execute();
+				echo "book with id:" .$_POST['bid']. " returned";
 			}
 			?>
 			</div>

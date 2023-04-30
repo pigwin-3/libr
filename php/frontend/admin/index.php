@@ -53,6 +53,16 @@ if($perm <= 1) {
                     lån ut bok
                 </div>
             </a>
+            <a href="returnbook.php">
+                <div class="admin-item">
+                    Retuner ut bok
+                </div>
+            </a>
+            <a href="listloans.php">
+                <div class="admin-item">
+                    Se alle utlån
+                </div>
+            </a>
         </div>
 	</body>
 </html>

@@ -79,9 +79,15 @@ if($perm <= 1) {
 					//DELETE FROM loan WHERE id = 25;
 					echo "Ser ut som  at boken allerede er lånt ut.";
 				} else {
-					$stmt = $con->prepare('INSERT INTO `loan`(`usrid`, `id`) VALUES (?,?)');
-					$stmt->bind_param('ss', $_POST['uid'], $_POST['bid']);
-					$stmt->execute();
+					// UPDATE `bookcopy` SET `instock` = '0' WHERE `bookcopy`.`id` = 8
+					$stockstate = '0';
+					$stmt2 = $con->prepare('UPDATE `bookcopy` SET `instock` = ? WHERE `bookcopy`.`id` = ?');
+					$stmt2->bind_param('ss', $stockstate, $_POST['bid']);
+					$stmt2->execute();
+
+					$stmt3 = $con->prepare('INSERT INTO `loan`(`usrid`, `id`) VALUES (?,?)');
+					$stmt3->bind_param('ss', $_POST['uid'], $_POST['bid']);
+					$stmt3->execute();
 					echo "Bok er nå lånt ut!";
 				}
 			}
