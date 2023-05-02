@@ -2,7 +2,7 @@
 session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: ../');
+	header('Location: ../test');
 	exit;
 }
 
@@ -31,31 +31,31 @@ if($perm <= 1) {
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
 	</head>
 	<body>
-        <?php include '../../tools/navbar.html'; ?>
+        <?php include '../../tools/navbar.php'; ?>
         <div class="admin-container">
             <a href="addbook.php">
                 <div class="admin-item">
-                    legg til bok
+                    Legg til bok
                 </div>
             </a>
             <a href="listbooks.php">
                 <div class="admin-item">
-                    se alle bøker
+                    Se alle bøker
                 </div>
             </a>
             <a href="editbook.php">
                 <div class="admin-item">
-                    rediger en bok inføring
+                    Rediger bok inføring
                 </div>
             </a>
             <a href="loanbook.php">
                 <div class="admin-item">
-                    lån ut bok
+                    Låne ut bok
                 </div>
             </a>
             <a href="returnbook.php">
                 <div class="admin-item">
-                    Retuner ut bok
+                    Returner ut bok
                 </div>
             </a>
             <a href="listloans.php">

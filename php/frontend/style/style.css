@@ -10,9 +10,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 2vh;
     background-color: #D90429;
     margin: 0;
+    height: 8vh;
 }
 .name {
     font-size: 8vh;
@@ -34,6 +35,49 @@ body {
     fill: #8D99AE;
     transition: 200ms;
 }
+.hamburger-icon {
+    cursor: pointer;
+}
+
+.menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40vh;
+    max-width: 50vw;
+    min-height: 40vh;
+    top: 11.9vh;
+    right: 0;
+    z-index: 1;
+    background-color: #D90429;
+    padding: 10px;
+    margin: 0;
+    padding-bottom: 3vh;
+    border-bottom-left-radius: 20px;
+
+  box-shadow: 6px 6px 8px #555;
+}
+
+.menu li {
+    margin-bottom: 10px;
+    list-style: none;
+    
+}
+
+.menu a {
+    color: #EDF2F4;
+    font-size: 6vh;
+    text-decoration: none;
+    transition: 200ms;
+}
+
+.menu a:hover {
+    color: #8D99AE;
+    transition: 200ms;
+}
+
 
 /*main page*/
 #hero {
@@ -146,7 +190,14 @@ body {
 }
 .book-item-title {
     font-size: 0.8em;
-    min-height: 2em;
+}
+.book-item-author {
+    font-size: 0.6em;
+    color: #555;
+}
+.book-item-isbn {
+    font-size: 0.4em;
+    color: #555;
 }
 .bookimg {
     height: 15vh;
@@ -195,9 +246,22 @@ background-color: #555;
     .book-item-title {
         font-size: 0.5em;
     }
+    .book-item-author {
+        font-size: 0.35em;
+    }
+    .book-item-isbn {
+        font-size: 0.25em;
+        color: #555;
+    }
 }
 @media  all and (min-width: 120vh) {
     .bookshelf {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media  all and (min-width: 240vh) {
+    .bookshelf {
+        max-width: 150vh;
+        grid-template-columns: repeat(6, 1fr);
     }
 }

@@ -46,7 +46,7 @@ if($perm <= 1) {
 
 
 
-        <?php include '../../tools/navbar.html'; ?>
+        <?php include '../../tools/navbar.php'; ?>
 		<div class="admin-center">
 			<div class="admin-settings-container-top">
 				<div class="admin-left-card">

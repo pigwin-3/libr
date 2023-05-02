@@ -46,7 +46,7 @@ if($perm <= 1) {
 
 
 
-        <?php include '../../tools/navbar.html'; ?>
+        <?php include '../../tools/navbar.php'; ?>
 		<div class="admin-center">
 			<div class="admin-settings-container-top">
 				<div class="admin-left-card">
@@ -103,7 +103,7 @@ if($perm <= 1) {
 				echo "test";
 				$stmt1->execute();
 
-				$stmt2 = $con->prepare("INSERT INTO bookcopy (bookid, `in stock`) VALUES ((SELECT bookid FROM books WHERE isbn = ? AND name = ? AND author = ? AND oclc = ?), 1)");
+				$stmt2 = $con->prepare("INSERT INTO bookcopy (bookid, `instock`) VALUES ((SELECT bookid FROM books WHERE isbn = ? AND name = ? AND author = ? AND oclc = ?), 1)");
 				$stmt2->bind_param('ssss', $isbn, $name, $author, $oclc);
 				$stmt2->execute();
 

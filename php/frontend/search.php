@@ -13,10 +13,10 @@ session_start();
 		<link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
 	</head>
 	<body class="loggedin">
-        <?php include '../tools/navbar.html'; ?>
+        <?php include '../tools/navbar.php'; ?>
 		<div class="top">
             <form id="search" method="GET" action="">
-                <input id="searchbar" type="text" name="q" placeholder="tittel/forfatter/isbn">
+                <input id="searchbar" type="text" name="q" placeholder="tittel/forfatter/isbn" value="<?php if (isset($_GET['q'])) { echo $_GET['q']; } ?>">
                 <input id="searchexecute" type="submit" value="søk">
             </form>
         </div>
@@ -43,6 +43,9 @@ session_start();
                     echo "<div class='book-item'>";
                     echo "<img class='bookimg' src='https://covers.openlibrary.org/b/olid/$oclc-M.jpg' alt=''>";
                     echo "<div class='book-item-title'>$name</div>";
+                    echo "<div class='book-item-author'>$author</div>";
+                    echo "<div class='book-item-title'>ledige: $stock</div>";
+                    echo "<div class='book-item-isbn'>".format_isbn($isbn)."</div>";
                     echo "</div>";
                 }
                 echo "</div>";
@@ -60,6 +63,20 @@ session_start();
             //stuff
         } else {
             echo "vendligst søk på noe";
+        }
+        function format_isbn($isbn) {
+            $formatted_isbn = '';
+            if (strlen($isbn) == 10) {
+            // ISBN-10 = n-nnnn-nnn-c
+            $formatted_isbn = substr($isbn, 0, 1) . '-' . substr($isbn, 1, 4) . '-' . substr($isbn, 5, 3) . '-' . substr($isbn, 8, 1);
+            } else if (strlen($isbn) == 13) {
+            // ISBN-13: = n-nnnn-nnnn-n-c
+            $formatted_isbn = substr($isbn, 0, 3) . '-' . substr($isbn, 3, 4) . '-' . substr($isbn, 7, 5) . '-' . substr($isbn, 12, 1);
+            } else {
+            // wrong length
+            $formatted_isbn = 'No ISBN';
+            }
+            return $formatted_isbn;
         }
         ?>
         </div>

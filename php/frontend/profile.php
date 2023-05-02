@@ -23,7 +23,7 @@ $stmt->close();
 		<link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
 	</head>
 	<body class="loggedin">
-        <?php include '../tools/navbar.html'; ?>
+        <?php include '../tools/navbar.php'; ?>
 		<div class="content">
 			<h2>konto detalier</h2>
 			<div>

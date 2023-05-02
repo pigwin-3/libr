@@ -20,9 +20,17 @@ function openModal() {
 function closeModal() {
   modal.style.display = "none"; // hide the modal
   stop(); // stop the QR code scanner
+  informer.style.display = "none"; // hide the modal
+}
+
+function inform() {
+  informer = document.getElementById("informer");
+  informer.style.display = "block"; // show the modal
 }
 
 function start() {
+  inform()
+  document.getElementById("informer-info").innerHTML = "scan book ISBN (only works with ISBN 13)";
   docReady(function () {
     var resultContainer = document.getElementById('qr-reader-results');
     var lastResult, countResults = 0;

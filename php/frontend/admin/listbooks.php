@@ -31,7 +31,7 @@ if($perm <= 1) {
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
 	</head>
 	<body>
-        <?php include '../../tools/navbar.html'; ?>
+        <?php include '../../tools/navbar.php'; ?>
 
 		<div class="admin-center">
 			<div class="admin-settings-container-top">
