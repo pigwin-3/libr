@@ -44,7 +44,7 @@ session_start();
                     echo "<img class='bookimg' src='https://covers.openlibrary.org/b/olid/$oclc-M.jpg' alt=''>";
                     echo "<div class='book-item-title'>$name</div>";
                     echo "<div class='book-item-author'>$author</div>";
-                    echo "<div class='book-item-title'>ledige: $stock</div>";
+                    echo "<div class='book-item-stock'>ledige: $stock</div>";
                     echo "<div class='book-item-isbn'>".format_isbn($isbn)."</div>";
                     echo "</div>";
                 }

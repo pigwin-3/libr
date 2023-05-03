@@ -30,20 +30,8 @@ if($perm <= 1) {
 		<link href="../style/scanner.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
-		<script defer src="../js/admin/addbook.js"></script>
-		<script defer src="../js/admin/addbookscanner.js"></script>
-		<script defer src="../js/html5-qrcode.js"></script>
 	</head>
 	<body>
-	<button type="button" onclick="openModal()">Open QR Code Scanner</button>
-	<div id="modal-container" class="modal">
-		<div class="modal-content">
-			<button class="close" type="button" onclick="closeModal()">X</button>
-			<div id="qr-reader"></div>
-			<div id="qr-reader-results"></div>
-		</div>
-	</div>
-
 
 
         <?php include '../../tools/navbar.php'; ?>
@@ -97,6 +85,23 @@ if($perm <= 1) {
 					echo "<td>$le</td>";
 					echo "</tr>";
 				}
+				function edit_link($id) {
+                $dir = dirname($_SERVER['PHP_SELF']);
+
+                // return to ListBooks.php
+                $params = array(
+                    'id' => $id,
+                    'r' => 'lb',
+                    'filter_by' => isset($_GET['filter_by']) ? $_GET['filter_by'] : null,
+                    'filter_letter' => isset($_GET['filter_letter']) ? $_GET['filter_letter'] : null,
+                    'sort' => isset($_GET['sort']) ? $_GET['sort'] : null,
+                    'page' => isset($_GET['page']) ? $_GET['page'] : null
+                );
+                $params = array_filter($params); // remove any null values
+                $params = http_build_query($params);
+                $url = "{$dir}/editbook.php?{$params}";
+                return $url;
+            }
                 ?>
 				</tbody></table>
 			</div>

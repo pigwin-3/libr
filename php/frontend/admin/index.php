@@ -63,6 +63,11 @@ if($perm <= 1) {
                     Se alle utlån
                 </div>
             </a>
+            <a href="listusers.php">
+                <div class="admin-item">
+                    Se alle brukere
+                </div>
+            </a>
         </div>
 	</body>
 </html>

@@ -1,9 +1,13 @@
+/*generic*/
 body {
     background-color: #EDF2F4;
     margin: 0;
     font-family: 'Atkinson Hyperlegible';
+    padding-bottom: 10vh;
 }
-/*generic*/
+a {
+    text-decoration: none;
+}
 
 /*navbar*/
 .navbar {
@@ -46,7 +50,7 @@ body {
     align-items: center;
     position: absolute;
     width: 40vh;
-    max-width: 50vw;
+    max-width: 80vw;
     min-height: 40vh;
     top: 11.9vh;
     right: 0;
@@ -56,8 +60,20 @@ body {
     margin: 0;
     padding-bottom: 3vh;
     border-bottom-left-radius: 20px;
-
-  box-shadow: 6px 6px 8px #555;
+    animation: open 500ms forwards;
+    box-shadow: 6px 6px 8px #555;
+}
+@keyframes open {
+    0% {
+        padding: 1px;
+        padding-bottom: 0vh;
+        opacity: 0%;
+    }
+    100% {
+        padding: 10px;
+        padding-bottom: 3vh;
+        opacity: 100%;
+    }
 }
 
 .menu li {
@@ -162,10 +178,9 @@ body {
     min-height: 10vh;
     display: flex;
     justify-content: center;
-    font-size: 2.5em;
-    padding-top: 1em;
+    font-size: 1.5rem;
+    padding-top: 1rem;
 }
-
 
 .section {
     font-size: 3rem;
@@ -189,15 +204,37 @@ body {
     box-sizing: border-box;
 }
 .book-item-title {
-    font-size: 0.8em;
+    font-size: 2.2rem;
+    font-weight: 600;
 }
 .book-item-author {
-    font-size: 0.6em;
+    font-size: 2rem;
     color: #555;
 }
 .book-item-isbn {
-    font-size: 0.4em;
+    font-size: 1.4rem;
+    color: #333;
+}
+.book-item-stock {
+    font-size: 2rem;
+}
+.book-item-loanstart {
+    font-size: 1.4rem;
+    color: #333;
+}
+.book-item-loanend {
+    font-size: 2rem;
+    color: #fff;
+    background-color: #b12;
+    border-radius: 20px;
+}
+.book-item-loanstart-label {
+    font-size: 12rem;
     color: #555;
+}
+.book-item-loanend-label {
+    font-size: 12rem;
+    color: #444;
 }
 .bookimg {
     height: 15vh;
@@ -243,15 +280,53 @@ background-color: #555;
     .bookshelf {
         grid-template-columns: repeat(3, 1fr);
     }
+    .bookshelf {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 95%;
+        max-width: 110vh;
+        gap: 2%;
+    }
+    .book-item {
+        margin: 0;
+        background-color: #fff;
+        padding: 1%;
+        text-align: center;
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
     .book-item-title {
-        font-size: 0.5em;
+        font-size: 1.1rem;
+        font-weight: 600;
     }
     .book-item-author {
-        font-size: 0.35em;
+        font-size: 1rem;
+        color: #555;
     }
     .book-item-isbn {
-        font-size: 0.25em;
+        font-size: 0.7rem;
+        color: #333;
+    }
+    .book-item-stock {
+        font-size: 1rem;
+    }
+    .book-item-loanstart {
+        font-size: 0.7rem;
+        color: #333;
+    }
+    .book-item-loanend {
+        font-size: 1rem;
+        color: #fff;
+        background-color: #b12;
+        border-radius: 20px;
+    }
+    .book-item-loanstart-label {
+        font-size: 0.6rem;
         color: #555;
+    }
+    .book-item-loanend-label {
+        font-size: 0.6rem;
+        color: #444;
     }
 }
 @media  all and (min-width: 120vh) {

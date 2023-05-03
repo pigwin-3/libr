@@ -16,8 +16,8 @@ if (!isset($_SESSION['loggedin'])) {
 		<link href="style/scanner.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
-		<script defer src="../js/admin/loanbookscanner.js"></script>
-		<script defer src="../js/html5-qrcode.js"></script>
+		<script defer src="js/selfloanbookscanner.js"></script>
+		<script defer src="js/html5-qrcode.js"></script>
 	</head>
 	<body>
 	<button type="button" onclick="openModal()">Open QR Code Scanner</button>

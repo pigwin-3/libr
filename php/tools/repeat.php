@@ -1,20 +1,14 @@
 suff: <?php 
 require 'database.php';
 
-// create a prepared statement
-$stmt = $con->prepare("SHOW TABLES LIKE ?");
-
-// bind the parameter
 $table_name = 'accounts';
-$stmt->bind_param("s", $table_name);
 
-// execute the prepared statement
+$stmt = $con->prepare("SHOW TABLES LIKE '$table_name'");
+
 $stmt->execute();
 
-// bind the result variable
 $stmt->bind_result($table);
 
-// fetch the results
 $table_exists = false;
 while ($stmt->fetch()) {
     $table_exists = true;
